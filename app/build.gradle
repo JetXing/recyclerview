@@ -26,12 +26,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile parent.libraries.androidGradle
+//    compile parent.libraries.androidGradle
     compile parent.libraries.butterknife
-    compile parent.libraries.gson
-    compile parent.libraries.supportv4
-    compile parent.libraries.supprotv13
+//    compile parent.libraries.supportv4
+//    compile parent.libraries.supprotv13
     compile parent.libraries.appcompat
     compile parent.libraries.cardview
     compile parent.libraries.recyclerview
+    compile parent.libraries.ripp
 }
