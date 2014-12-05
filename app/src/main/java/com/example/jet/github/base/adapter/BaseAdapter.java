@@ -112,5 +112,19 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
         void onClick(View itemView, int position);
     }
 
+    public boolean isHaveHeaderView() {
+        return isHaveHeaderView;
+    }
 
+    public void setHaveHeaderView(boolean isHaveHeaderView) {
+        this.isHaveHeaderView = isHaveHeaderView;
+    }
+
+    public boolean isHaveFooterView() {
+        return isHaveFooterView;
+    }
+
+    public void setHaveFooterView(boolean isHaveFooterView) {
+        this.isHaveFooterView = isHaveFooterView;
+    }
 }

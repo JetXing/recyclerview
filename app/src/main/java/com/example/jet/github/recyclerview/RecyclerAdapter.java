@@ -33,12 +33,12 @@ public class RecyclerAdapter extends BaseAdapter<String> {
 
     @Override
     protected int getHeaderViewResourceId() {
-        return R.layout.fragment_main_recycler_item;
+        return R.layout.fragment_main_recycler_header;
     }
 
     @Override
     protected int getFooterViewResourceId() {
-        return R.layout.fragment_main_recycler_item;
+        return R.layout.fragment_main_recycler_footer;
     }
 
     @Override
