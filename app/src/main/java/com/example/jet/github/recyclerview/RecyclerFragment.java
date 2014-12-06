@@ -58,6 +58,8 @@ public class RecyclerFragment extends BaseFragment implements BaseAdapter.Recycl
         mStrings.add("itemview");
         mStrings.add("footerview");
         mAdapter = new RecyclerAdapter(mStrings, this);
+        mAdapter.addHeaderView(View.inflate(getActivity(), R.layout.fragment_main_recycler_header, null));
+        mAdapter.addFooterView(View.inflate(getActivity(), R.layout.fragment_main_recycler_footer, null));
         mAdapter.setHaveFooterView(true);
         mAdapter.setHaveHeaderView(true);
         mRecyclerView.setAdapter(mAdapter);
@@ -66,6 +68,7 @@ public class RecyclerFragment extends BaseFragment implements BaseAdapter.Recycl
 
     @Override
     public void onClick(View itemView, int position) {
+
         Toast.makeText(getActivity(), mStrings.get(position), Toast.LENGTH_SHORT).show();
     }
 }

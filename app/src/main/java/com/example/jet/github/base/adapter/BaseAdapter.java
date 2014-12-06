@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,44 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
     protected Context mContext;
     protected List<T> mDatas = new ArrayList<T>();
     protected RecyclerViewItemClickListener mClickListener;
+
+    /**
+     * 是否启动headerview
+     */
     protected boolean isHaveHeaderView = false;
+
+    /**
+     * 是否启动footerview
+     */
     protected boolean isHaveFooterView = false;
+
+    protected View headerView;
+
+    public View getFooterView() {
+        return footerView;
+    }
+
+    public void addFooterView(View footerView) {
+        this.footerView = footerView;
+    }
+    public void removeFooterView() {
+        isHaveFooterView = false;
+        this.footerView = null;
+    }
+
+    public View getHeaderView() {
+        return headerView;
+    }
+
+    public void addHeaderView(View headerView) {
+        this.headerView = headerView;
+    }
+    public void removeHeaderView() {
+        isHaveHeaderView = false;
+        this.headerView = null;
+    }
+
+    protected View footerView;
 
     public BaseAdapter(List<T> mDatas, RecyclerViewItemClickListener mClickListener) {
         super();
@@ -37,12 +74,10 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
         View mView;
         switch (viewType) {
             case TYPE_HEADERVIEW:
-                mView = LayoutInflater.from(mContext)
-                        .inflate(getHeaderViewResourceId(), parent, false);
+                mView = getHeaderView();
                 break;
             case TYPE_FOOTERVIEW:
-                mView = LayoutInflater.from(mContext)
-                        .inflate(getFooterViewResourceId(), parent, false);
+                mView = getFooterView();
                 break;
             default:
                 mView = LayoutInflater.from(mContext)
@@ -65,12 +100,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
         }
     }
 
-
-
-    protected abstract int getHeaderViewResourceId();
-
-    protected abstract int getFooterViewResourceId();
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         setViewData(holder, position, getItemViewType(position));
@@ -86,7 +115,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
     protected abstract ViewHolder getViewHolder(View itemView, RecyclerViewItemClickListener mClickListener, int viewType);
 
     protected abstract void setViewData(ViewHolder holder, int position, int viewType);
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
