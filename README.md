@@ -5,9 +5,7 @@ recyclerview
 添加方法：
 addHeaderView(View mView)
 addFooterView(View mView)
-但是添加以后需要启用一下才可以显示：
-setHaveHeaderView(boolean isHaveHeaderView)
-setHaveFooterView(boolean isHaveFooterView)
+
 删除方法：
 removeHeaderView()
 removeFooterView()
