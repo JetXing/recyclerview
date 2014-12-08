@@ -60,8 +60,6 @@ public class RecyclerFragment extends BaseFragment implements BaseAdapter.Recycl
         mAdapter = new RecyclerAdapter(mStrings, this);
         mAdapter.addHeaderView(View.inflate(getActivity(), R.layout.fragment_main_recycler_header, null));
         mAdapter.addFooterView(View.inflate(getActivity(), R.layout.fragment_main_recycler_footer, null));
-        mAdapter.setHaveFooterView(true);
-        mAdapter.setHaveHeaderView(true);
         mRecyclerView.setAdapter(mAdapter);
     }
 

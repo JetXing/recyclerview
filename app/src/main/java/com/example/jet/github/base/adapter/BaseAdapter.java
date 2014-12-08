@@ -24,16 +24,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
     protected List<T> mDatas = new ArrayList<T>();
     protected RecyclerViewItemClickListener mClickListener;
 
-    /**
-     * 是否启动headerview
-     */
-    protected boolean isHaveHeaderView = false;
-
-    /**
-     * 是否启动footerview
-     */
-    protected boolean isHaveFooterView = false;
-
     protected View headerView;
 
     public View getFooterView() {
@@ -44,7 +34,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
         this.footerView = footerView;
     }
     public void removeFooterView() {
-        isHaveFooterView = false;
         this.footerView = null;
     }
 
@@ -56,7 +45,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
         this.headerView = headerView;
     }
     public void removeHeaderView() {
-        isHaveHeaderView = false;
         this.headerView = null;
     }
 
@@ -90,9 +78,9 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
     @Override
     public int getItemViewType(int position) {
         int count = getItemCount() - 1;
-        if (position == 0 && isHaveHeaderView){
+        if (position == 0 && headerView != null){
                 return TYPE_HEADERVIEW;
-        } else if (position == count && isHaveFooterView){
+        } else if (position == count && footerView != null){
                 return TYPE_FOOTERVIEW;
         } else {
             return super.getItemViewType(position);
@@ -140,19 +128,4 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
         void onClick(View itemView, int position);
     }
 
-    public boolean isHaveHeaderView() {
-        return isHaveHeaderView;
-    }
-
-    public void setHaveHeaderView(boolean isHaveHeaderView) {
-        this.isHaveHeaderView = isHaveHeaderView;
-    }
-
-    public boolean isHaveFooterView() {
-        return isHaveFooterView;
-    }
-
-    public void setHaveFooterView(boolean isHaveFooterView) {
-        this.isHaveFooterView = isHaveFooterView;
-    }
 }
