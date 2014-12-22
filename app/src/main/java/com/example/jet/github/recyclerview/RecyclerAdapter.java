@@ -7,7 +7,6 @@ import android.widget.TextView;
 import com.example.jet.github.R;
 import com.example.jet.github.base.adapter.BaseAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
@@ -31,15 +30,18 @@ public class RecyclerAdapter extends BaseAdapter<String> {
         return super.getItemViewType(position);
     }
 
-//    @Override
-//    protected int getHeaderViewResourceId() {
-//        return R.layout.fragment_main_recycler_header;
-//    }
-//
-//    @Override
-//    protected int getFooterViewResourceId() {
-//        return R.layout.fragment_main_recycler_footer;
-//    }
+
+    @Override
+    public void addHeaderView(View headerView) {
+        super.addHeaderView(headerView);
+        mDatas.add(0, "h");
+    }
+
+    @Override
+    public void addFooterView(View footerView) {
+        super.addFooterView(footerView);
+        mDatas.add(mDatas.size(), "f");
+    }
 
     @Override
     protected BaseAdapter.ViewHolder getViewHolder(View itemView, RecyclerViewItemClickListener mClickListener, int viewType) {
@@ -58,31 +60,19 @@ public class RecyclerAdapter extends BaseAdapter<String> {
     protected void setViewData(BaseAdapter.ViewHolder holder, int position, int viewType) {
         switch (viewType) {
             case TYPE_HEADERVIEW:
-                setHeaderViewData(holder, position);
                 break;
             case TYPE_FOOTERVIEW:
-                setFooterViewData(holder, position);
-
                 break;
             default:
-                setItemViewData(holder, position);
+                setItemViewData(holder,  position );
                 break;
         }
 
     }
 
-    private void setHeaderViewData(BaseAdapter.ViewHolder holder, int position) {
-        HeaderViewHolder mViewHolder = (HeaderViewHolder) holder;
-        mViewHolder.tv.setText(mDatas.get(position));
-    }
 
     private void setItemViewData(BaseAdapter.ViewHolder holder, int position) {
         ViewHolder mViewHolder = (ViewHolder) holder;
-        mViewHolder.tv.setText(mDatas.get(position));
-    }
-
-    private void setFooterViewData(BaseAdapter.ViewHolder holder, int position) {
-        FooterViewHolder mViewHolder = (FooterViewHolder) holder;
         mViewHolder.tv.setText(mDatas.get(position));
     }
 
@@ -96,23 +86,5 @@ public class RecyclerAdapter extends BaseAdapter<String> {
         }
     }
 
-    public static class HeaderViewHolder extends BaseAdapter.ViewHolder {
 
-        @InjectView(R.id.tv)
-        TextView tv;
-
-        public HeaderViewHolder(View itemView, BaseAdapter.RecyclerViewItemClickListener mClickListener) {
-            super(itemView, mClickListener);
-        }
-    }
-
-    public static class FooterViewHolder extends BaseAdapter.ViewHolder {
-
-        @InjectView(R.id.tv)
-        TextView tv;
-
-        public FooterViewHolder(View itemView, BaseAdapter.RecyclerViewItemClickListener mClickListener) {
-            super(itemView, mClickListener);
-        }
-    }
 }

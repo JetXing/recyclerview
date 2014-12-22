@@ -52,14 +52,17 @@ public class RecyclerFragment extends BaseFragment implements BaseAdapter.Recycl
     @Override
     protected void initData() {
         mStrings = new ArrayList<String>();
-        mStrings.add("headerview");
-        mStrings.add("itemview");
-        mStrings.add("itemview");
-        mStrings.add("itemview");
-        mStrings.add("footerview");
+        mStrings.add("first_itemview");
+        mStrings.add("second_itemview");
+        mStrings.add("third_itemview");
+        mStrings.add("fourth_itemview");
+        mStrings.add("fifth_itemview");
+        mStrings.add("sixth_itemview");
         mAdapter = new RecyclerAdapter(mStrings, this);
-        mAdapter.addHeaderView(View.inflate(getActivity(), R.layout.fragment_main_recycler_header, null));
-        mAdapter.addFooterView(View.inflate(getActivity(), R.layout.fragment_main_recycler_footer, null));
+        mAdapter.addHeaderView(new HeaderViewHelper(getActivity()).getHeadView());
+        mAdapter.addHeaderView(new HeaderViewHelper(getActivity()).getHeadView());
+        mAdapter.addFooterView(new FooterViewHelper(getActivity()).getFooterView());
+
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -67,6 +70,6 @@ public class RecyclerFragment extends BaseFragment implements BaseAdapter.Recycl
     @Override
     public void onClick(View itemView, int position) {
 
-        Toast.makeText(getActivity(), mStrings.get(position), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), mStrings.get(position) + position, Toast.LENGTH_SHORT).show();
     }
 }

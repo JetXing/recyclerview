@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +23,9 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
     protected List<T> mDatas = new ArrayList<T>();
     protected RecyclerViewItemClickListener mClickListener;
 
+    protected List<View> mHeaderViewInfos = new ArrayList<View>();
+//    protected List<View> mFooterViewInfos = new ArrayList<View>();
+
     protected View headerView;
 
     public View getFooterView() {
@@ -31,8 +33,10 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
     }
 
     public void addFooterView(View footerView) {
+//        mFooterViewInfos.add(footerView);
         this.footerView = footerView;
     }
+
     public void removeFooterView() {
         this.footerView = null;
     }
@@ -42,8 +46,10 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
     }
 
     public void addHeaderView(View headerView) {
+        mHeaderViewInfos.add(headerView);
         this.headerView = headerView;
     }
+
     public void removeHeaderView() {
         this.headerView = null;
     }
@@ -70,22 +76,35 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
             default:
                 mView = LayoutInflater.from(mContext)
                         .inflate(getResourceId(), parent, false);
-
+                break;
         }
         return getViewHolder(mView, mClickListener, viewType);
     }
 
     @Override
     public int getItemViewType(int position) {
+
         int count = getItemCount() - 1;
-        if (position == 0 && headerView != null){
-                return TYPE_HEADERVIEW;
-        } else if (position == count && footerView != null){
-                return TYPE_FOOTERVIEW;
+        if (isHeaderView(position)) {
+            return TYPE_HEADERVIEW;
+        } else if (isFooterView(position, count)) {
+            return TYPE_FOOTERVIEW;
         } else {
             return super.getItemViewType(position);
-
         }
+    }
+
+    private boolean isFooterView(int position, int count) {
+        return position == count && footerView != null;
+    }
+
+    private boolean isHeaderView(int position) {
+        int size = mHeaderViewInfos.size();
+        if (position < size && headerView != null) {
+            headerView = mHeaderViewInfos.get(position);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -95,7 +114,8 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return mDatas.size();
+        int size = mDatas.size();
+        return size;
     }
 
     protected abstract int getResourceId();
@@ -117,7 +137,10 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
 
         @Override
         public void onClick(View v) {
-            mClickListener.onClick(v, getPosition());
+            if (mClickListener != null) {
+                mClickListener.onClick(v, getPosition());
+
+            }
         }
     }
 
@@ -126,6 +149,20 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
      */
     public interface RecyclerViewItemClickListener {
         void onClick(View itemView, int position);
+    }
+
+    public static class HeaderViewHolder extends BaseAdapter.ViewHolder {
+
+        public HeaderViewHolder(View itemView, BaseAdapter.RecyclerViewItemClickListener mClickListener) {
+            super(itemView, null);
+        }
+    }
+
+    public static class FooterViewHolder extends BaseAdapter.ViewHolder {
+
+        public FooterViewHolder(View itemView, BaseAdapter.RecyclerViewItemClickListener mClickListener) {
+            super(itemView, null);
+        }
     }
 
 }
