@@ -35,6 +35,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
     public void addFooterView(View footerView) {
 //        mFooterViewInfos.add(footerView);
         this.footerView = footerView;
+        mDatas.add(mDatas.size(), getData());
     }
 
     public void removeFooterView() {
@@ -48,6 +49,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
     public void addHeaderView(View headerView) {
         mHeaderViewInfos.add(headerView);
         this.headerView = headerView;
+        mDatas.add(0, getData());
     }
 
     public void removeHeaderView() {
@@ -123,6 +125,8 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
     protected abstract ViewHolder getViewHolder(View itemView, RecyclerViewItemClickListener mClickListener, int viewType);
 
     protected abstract void setViewData(ViewHolder holder, int position, int viewType);
+
+    protected abstract T getData();
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

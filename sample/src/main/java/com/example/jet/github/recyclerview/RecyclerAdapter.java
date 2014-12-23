@@ -35,19 +35,6 @@ public class RecyclerAdapter extends BaseAdapter<User> {
         return super.getItemViewType(position);
     }
 
-
-    @Override
-    public void addHeaderView(View headerView) {
-        super.addHeaderView(headerView);
-        mDatas.add(0, new User());
-    }
-
-    @Override
-    public void addFooterView(View footerView) {
-        super.addFooterView(footerView);
-        mDatas.add(mDatas.size(), new User());
-    }
-
     @Override
     protected BaseAdapter.ViewHolder getViewHolder(View itemView, RecyclerViewItemClickListener mClickListener, int viewType) {
         switch (viewType) {
@@ -84,6 +71,11 @@ public class RecyclerAdapter extends BaseAdapter<User> {
                 break;
         }
 
+    }
+
+    @Override
+    protected User getData() {
+        return new User();
     }
 
 

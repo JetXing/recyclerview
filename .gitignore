@@ -30,4 +30,8 @@ proguard/
 
 # Log Files
 *.log
+# ignore gitcafehttpsample
+gitcafehttpsample/*
+
+
 
