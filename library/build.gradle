@@ -23,4 +23,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile parent.libraries.butterknife
     compile parent.libraries.recyclerview
+    compile parent.libraries.cardslib_core
 }

@@ -2,8 +2,10 @@
 
 buildscript {
     repositories {
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         jcenter()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.0'
 
@@ -14,6 +16,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         jcenter()
     }
 }
@@ -28,6 +31,7 @@ ext.libraries = [
         cardview          : 'com.android.support:cardview-v7:21.0.0',
         recyclerview      : 'com.android.support:recyclerview-v7:21.0.2',
         ripp              : 'com.github.traex.rippleeffect:library:1.2.1',
+        cardslib_core     : 'com.github.gabrielemariotti.cards:cardslib-core:2.0.1',
 ]
 ext {
     versionCode = 1
