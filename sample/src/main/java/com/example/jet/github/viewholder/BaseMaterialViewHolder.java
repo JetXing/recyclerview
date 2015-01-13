@@ -29,6 +29,7 @@ public abstract class BaseMaterialViewHolder<T> extends BaseViewHolder<T> implem
     @Override
     public void setViewData(Context mContext, T object, int position, int viewType) {
         mCardViewNative.setCard(getCard(mContext, object, position, viewType));
+
         setAnimationToCardView();
     }
 
@@ -43,7 +44,7 @@ public abstract class BaseMaterialViewHolder<T> extends BaseViewHolder<T> implem
                         } else {
                             mCardViewNative.animate().setDuration(100).scaleX(1.01f).scaleY(1.01f);
                         }
-                        return false;
+                        return true;
                     case MotionEvent.ACTION_CANCEL:
                     case MotionEvent.ACTION_UP:
                         if (Build.VERSION.SDK_INT >= Constants.API_L) {

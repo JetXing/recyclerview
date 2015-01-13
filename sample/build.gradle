@@ -29,6 +29,4 @@ dependencies {
     compile project(':library')
     compile parent.libraries.appcompat
     compile parent.libraries.cardview
-    compile parent.libraries.ripp
-//    compile parent.libraries.recyclerviewAnimators
 }
